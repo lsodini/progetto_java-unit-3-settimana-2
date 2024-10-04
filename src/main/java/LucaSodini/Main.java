@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Collezione collezione = new Collezione();
         Scanner scanner = new Scanner(System.in);
 
@@ -17,6 +17,7 @@ public class Main {
             System.out.println("5. Rimuovi un gioco");
             System.out.println("6. Aggiorna il prezzo di un gioco");
             System.out.println("7. Mostra statistiche");
+            System.out.println("8. Mostra Collezione");
             System.out.println("0. Esci");
 
             int scelta = scanner.nextInt();
@@ -156,6 +157,10 @@ public class Main {
                     collezione.stampaStatistiche();
                     break;
 
+                case 8:
+                    mostraCollezione(collezione);
+                    break;
+
                 case 0:
                     System.out.println("Uscita dal programma.");
                     scanner.close();
@@ -167,6 +172,19 @@ public class Main {
             }
         }
     }
+
+    public static void mostraCollezione(Collezione collezione) {
+        List<Gioco> giochi = collezione.cercaGiochiPerPrezzo(Double.MAX_VALUE); // ottieni tutti i giochi
+        if (giochi.isEmpty()) {
+            System.out.println("Nessun gioco nella collezione.");
+        } else {
+            System.out.println("Collezione di Giochi:");
+            for (Gioco gioco : giochi) {
+                System.out.println(gioco.getTitolo() + " (ID: " + gioco.getIdGioco() + ")");
+            }
+        }
+    }
+
 
     private static String chiediId(Scanner scanner, Collezione collezione) {
         while (true) {
@@ -228,9 +246,9 @@ public class Main {
 
     private static String chiediPiattaforma(Scanner scanner) {
         while (true) {
-            System.out.println("Inserisci piattaforma (PC, PS5, XBox):");
+            System.out.println("Inserisci piattaforma (PC, PS5, XBox ecc...):");
             String piattaforma = scanner.nextLine();
-            if (piattaforma.isEmpty() || (!piattaforma.equalsIgnoreCase("PC") && !piattaforma.equalsIgnoreCase("PS5") && !piattaforma.equalsIgnoreCase("XBox"))) {
+            if (piattaforma.isEmpty() ) {
                 System.out.println("Piattaforma non valida. Riprova.");
             } else {
                 return piattaforma;

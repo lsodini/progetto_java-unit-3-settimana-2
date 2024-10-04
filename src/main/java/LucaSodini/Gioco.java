@@ -19,6 +19,10 @@ public abstract class Gioco {
         this.prezzo = prezzo;
     }
 
+    public String getTitolo() {
+        return titolo;
+    }
+
     public String getIdGioco() {
         return idGioco;
     }
